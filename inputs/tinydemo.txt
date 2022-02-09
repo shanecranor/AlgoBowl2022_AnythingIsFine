@@ -1,0 +1,4 @@
+5 // n = number of tasks
+2 // m = number of machines
+12 7 3 22 24 // task runtimes
+1 2 // machine speeds
