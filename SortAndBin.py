@@ -7,7 +7,7 @@ Description:
 	Sorts the tasks and machines from best to worst and gives the fastest machines the worst tasks
 	Returns the length of the solution and the task distribution table
 """
-def SSB(tasks, machines):
+def SAB(tasks, machines):
 	#TODO: Shane finish algorithm
 	taskOrder = sortRememberOrder(tasks)
 	# print("TASKORDER\n", taskOrder)
