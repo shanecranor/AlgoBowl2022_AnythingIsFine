@@ -29,13 +29,40 @@ Output: None
 Description:
 	Prints out which tasks are done by which machine
 """
+def printLongRunInfo(name, performance, distribution):
+	printBriefRunInfo(name,performance)
+	printDistribution(distribution)
 
-def printRunInfo(name, performance, distribution):
+"""
+Input: Algorithm name, longest running cpu, distribution
+Output: None
+Description:
+	Prints out the performance numbers
+"""
+def printBriefRunInfo(name, performance):
 	print(f"Algorithm {name} used {performance} time units")
-	if distribution is None:
-		return
+
+"""
+Input: distribution
+Output: None
+Description:
+	Prints out a readable version of the output txt
+"""
+def printDistribution(distribution):
 	print(f"Printing Distribution:")
 	for i, machine in enumerate(distribution):
 		print(f"machine {i}: {machine}")
 
-	
+"""
+Input: distribution
+Output: 
+Description:
+	prints a submitable output file
+"""
+def generateOutputFile(distribution):
+	# TODO: write a version of this that outputs as a string and or prints to a file
+	print(f"Printing Distribution:")
+	for i, machine in enumerate(distribution):
+		for task in machine:
+			print(task, end =' ')
+		print()
