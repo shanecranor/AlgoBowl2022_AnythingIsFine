@@ -7,7 +7,10 @@ Description:
 	Sorts the tasks and machines from best to worst and gives the fastest machines the worst tasks
 	Returns the length of the solution and the task distribution table
 """
-def SAB(tasks, machines):
+def SAB(tasks, machines, rand=-1, seed=-1):
+	mutations = 0
+	if seed != -1:
+		random.seed(seed)
 	taskOrder = sortRememberOrder(tasks)
 	# print("TASKORDER\n", taskOrder)
 	machineOrder = sortRememberOrder(machines)
@@ -25,7 +28,10 @@ def SAB(tasks, machines):
 		for i, machine in enumerate(outputMatrix):
 			# calculate time it would take with the new task added
 			machineSpeed = machine[2] + (task[0]/machine[0][0])
-			if(machineSpeed <= fastestMachineSpeed): #or random.randint(0,1000) < 1):
+			r = rand != -1 and not machineSpeed <= fastestMachineSpeed and random.randint(0,rand) < 1 
+			if r:
+				mutations += 1
+			if(machineSpeed <= fastestMachineSpeed or r):
 				fastestMachine, fastestMachineSpeed = i, machineSpeed
 		# put the task on the best machine for said task and add the task length
 		outputMatrix[fastestMachine][1].append(task)
@@ -41,6 +47,7 @@ def SAB(tasks, machines):
 		for task in outputMatrix[i][1]:
 			machine.append(task[1])
 		distribution.append(machine)
+	#print("MUTATIONS: ", mutations)
 	return (Tools.calcTotalTime(distribution, tasks, machines), distribution)
 	
 def sortRememberOrder(list):
