@@ -8,7 +8,6 @@ Description:
 	Returns the length of the solution and the task distribution table
 """
 def SAB(tasks, machines):
-	#TODO: Shane finish algorithm
 	taskOrder = sortRememberOrder(tasks)
 	# print("TASKORDER\n", taskOrder)
 	machineOrder = sortRememberOrder(machines)

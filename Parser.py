@@ -59,9 +59,10 @@ Output:
 Description:
 	prints a submitable output file
 """
-def generateOutputFile(distribution):
+def generateOutputFile(performance, distribution):
 	# TODO: write a version of this that outputs as a string and or prints to a file
-	print(f"Printing Distribution:")
+	print(f"Printing Output File:")
+	print(performance)
 	for i, machine in enumerate(distribution):
 		for task in machine:
 			print(task, end =' ')
