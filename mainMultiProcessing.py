@@ -14,7 +14,7 @@ def Sab(s):
 if __name__ == "__main__":
 	#time and run 1000 multithreaded iterations
 	start = time.time() 
-	m = multiprocessing.Pool(processes=16).map(Sab, range(10000))
+	m = multiprocessing.Pool(processes=16).map(Sab, range(1000))
 	end = time.time()
 	print("total time= ", end-start)
 	performance, distribution = min(m, key=lambda i: i[0])
