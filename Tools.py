@@ -41,7 +41,9 @@ Output: the lists
 Description:
 	Loops through each machine in the distribution and find out which one ends last
 """
-def createInput(tasks, machines):
+def createInput(tasks, machines, seed=-1):
+	if seed != -1:
+		random.seed(seed)
 	tasksList = []
 	machinesList = []
 
@@ -75,8 +77,4 @@ def createInputFile(tasksList, machinesList, fileName):
 	f = open(fileName, "w")
 	f.write(out)
 	f.close()
-
-
-one,two = createInput(10,20)
-createInputFile(one, two, "test.txt")
 
