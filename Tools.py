@@ -1,6 +1,7 @@
 from cgi import test
 import statistics
 import random
+
 """
 Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
@@ -39,7 +40,7 @@ def printDetailedStats(distribution, tasks, machines):
 Input: number of tasks, number of machines
 Output: the lists
 Description:
-	Loops through each machine in the distribution and find out which one ends last
+	creates two lists of random integers in the appropriate ranges
 """
 def createInput(tasks, machines):
 	tasksList = []
@@ -77,6 +78,22 @@ def createInputFile(tasksList, machinesList, fileName):
 	f.close()
 
 
-one,two = createInput(10,20)
-createInputFile(one, two, "test.txt")
+"""
+Input: tasksList
+Output: A list of permuted tasksLists
+Description:
+	recursively returns a list of every possible permutation of tasksList
+"""
+def combinationCompiler(tasksList):
+	for r in range(1, len(tasksList)+1):
+		print("Fix me")
+		
+	def doCombination(currentTasks, data[], start, end, index):
+		# base case
+		if (index == len(data)):
+			tempData = data
+			
+
+
+
 
