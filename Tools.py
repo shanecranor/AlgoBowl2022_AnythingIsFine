@@ -1,4 +1,6 @@
+from cgi import test
 import statistics
+import random
 """
 Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
@@ -32,3 +34,49 @@ def printDetailedStats(distribution, tasks, machines):
 		"""
 	)
 	return
+
+"""
+Input: number of tasks, number of machines
+Output: the lists
+Description:
+	Loops through each machine in the distribution and find out which one ends last
+"""
+def createInput(tasks, machines):
+	tasksList = []
+	machinesList = []
+
+	# create tasks runtimes
+	for i in range(tasks):
+		tasksList.append(random.randint(1,10000))
+
+	# create machine speeds
+	for i in range(machines):
+		machinesList.append(random.randint(1,20))
+
+	return (tasksList, machinesList)
+
+def createInputFile(tasksList, machinesList, fileName):
+	out = ""
+
+	# add the number of tasks and machines
+	out += str(len(tasksList)) + "\n" + str(len(machinesList)) + "\n"
+
+	# for loop to output 
+	for task in tasksList:
+		out += str(task) + " "
+
+	out += "\n"
+
+	# for loop to output tasks speeds
+	# ASK TO SEE IF WE NEED TO REMOVE LAST SPACE
+	for machine in machinesList:
+		out += str(machine) + " "
+
+	f = open(fileName, "w")
+	f.write(out)
+	f.close()
+
+
+one,two = createInput(10,20)
+createInputFile(one, two, "test.txt")
+
