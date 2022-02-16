@@ -1,4 +1,5 @@
 from cgi import test
+from operator import index
 import statistics
 import random
 
@@ -90,7 +91,7 @@ def combinationCompiler(tasksList):
 	for r in range(1, len(tasksList)):
 		print("Fix me")
 		
-def doCombination(currentTasks, data[], start, end, index):
+def doCombination(urrentTasks, data, start, end, index):
 	# base case
 	if (index == len(data)):
 		tempData = data
