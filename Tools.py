@@ -1,4 +1,5 @@
 from cgi import test
+import itertools 		# for permuting
 import statistics
 import random
 
@@ -82,18 +83,22 @@ def createInputFile(tasksList, machinesList, fileName):
 Input: tasksList
 Output: A list of permuted tasksLists
 Description:
-	recursively returns a list of every possible permutation of tasksList
+	Use the itertools module to create a list of all permutations
+	of inputted tasksList
+
+	in-depth explanation found here:
+	https://www.kite.com/python/answers/how-to-find-all-combinations-of-a-list-in-python
 """
 def combinationCompiler(tasksList):
-	for r in range(1, len(tasksList)+1):
-		print("Fix me")
-		
-	def doCombination(currentTasks, data[], start, end, index):
-		# base case
-		if (index == len(data)):
-			tempData = data
-			
+	print("fix")
+	# create a list to hold the permuted lists
+	permutedLists = []
+	for r in range(len(tasksList)+1):
+		# permute the current combination
+		combinationObject = itertools.combinations(tasksList, r)
 
+		# add current combination to a list
+		currentCombination = list(combinationObject)
 
-
-
+		# add currentCombination to big list
+		permutedLists.append(currentCombination)
