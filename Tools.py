@@ -1,5 +1,9 @@
 from cgi import test
+<<<<<<< HEAD
 import itertools 		# for permuting
+=======
+from operator import index
+>>>>>>> 2916dc04c37f35a964dd1821f2594fe1b98393ac
 import statistics
 import random
 
@@ -43,7 +47,9 @@ Output: the lists
 Description:
 	creates two lists of random integers in the appropriate ranges
 """
-def createInput(tasks, machines):
+def createInput(tasks, machines, seed=-1):
+	if seed != -1:
+		random.seed(seed)
 	tasksList = []
 	machinesList = []
 
@@ -90,7 +96,6 @@ Description:
 	https://www.kite.com/python/answers/how-to-find-all-combinations-of-a-list-in-python
 """
 def combinationCompiler(tasksList):
-	print("fix")
 	# create a list to hold the permuted lists
 	permutedLists = []
 	for r in range(len(tasksList)+1):
