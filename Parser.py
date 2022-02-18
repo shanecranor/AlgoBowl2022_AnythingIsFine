@@ -17,7 +17,7 @@ def parseInputFile(fileName):
 	#check to make sure the numbers add up
 	if n != len(tasks):
 		print(f"n is defined as {n}, however there are {len(tasks)} tasks listed")
-		if m == len(tasks): return #don't return if there is another error
+		if m == len(tasks): return # don't return if there is another error
 	if m != len(machines):
 		print(f"m is defined as {m}, however there are {len(machines)} machines listed")
 		return

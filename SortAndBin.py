@@ -1,5 +1,10 @@
 import Tools
 import random
+import time
+
+""" IDEA:
+Put all tasks on fastest machine (ie what DUMB does)
+"""
 """
 Input: tuple (tasks, machines)
 Output: tuple (max length, 2D array of task allocation per machine)
@@ -8,19 +13,18 @@ Description:
 	Returns the length of the solution and the task distribution table
 """
 def SAB(tasks, machines, rand=-1, seed=-1):
-	mutations = 0
-	if seed != -1:
-		random.seed(seed)
+	if seed != -1: random.seed(seed)
+	# sort tasks and machines
 	taskOrder = sortRememberOrder(tasks)
-	# print("TASKORDER\n", taskOrder)
 	machineOrder = sortRememberOrder(machines)
-	# print("MACHINEORDER\n", machineOrder)
+	# create output matrix
 	outputMatrix = []
 	for machine in machineOrder:
 		outputMatrix.append([machine, [], 0])
 	# loop through every task
 	for task in taskOrder:
-		# simulate putting the task on the fastest machine
+		# simulate putting the task on each machine
+		# start by guessing that machine 0, the fastest machine takes the least time
 		fastestMachine = 0
 		fastestMachineSpeed = outputMatrix[0][2] + (task[0]/outputMatrix[0][0][0])
 		#loop throuch each machine to see if we can find a scenario where it is faster 
@@ -29,8 +33,6 @@ def SAB(tasks, machines, rand=-1, seed=-1):
 			# calculate time it would take with the new task added
 			machineSpeed = machine[2] + (task[0]/machine[0][0])
 			r = rand != -1 and not machineSpeed <= fastestMachineSpeed and random.randint(0,rand) < 1 
-			if r:
-				mutations += 1
 			if(machineSpeed <= fastestMachineSpeed or r):
 				fastestMachine, fastestMachineSpeed = i, machineSpeed
 		# put the task on the best machine for said task and add the task length

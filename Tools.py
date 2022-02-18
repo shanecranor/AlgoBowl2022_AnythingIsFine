@@ -24,7 +24,10 @@ def printDetailedStats(distribution, tasks, machines):
 		#TODO: use numpy for faster addition  (probably not a huge bottleneck tho)
 		#https://stackoverflow.com/questions/47734392/python-numpy-array-sum-over-certain-indices
 		timesArr[i] = sum(tasks[i] for i in machine)/machines[i]
-		print(f"Machine {i}: \t Speed:{machines[i]} \t Runtime: {round(timesArr[i],2)} \t shortest task = {min(tasks[i] for i in machine)} longest task = {max(tasks[i] for i in machine)}")
+		if timesArr[i] == 0:
+			print(f"Machine {i}: \t Speed:{machines[i]} No tasks alloted")
+		else:
+			print(f"Machine {i}: \t Speed:{machines[i]} \t Runtime: {round(timesArr[i],2)} \t shortest task = {min(tasks[i] for i in machine)} longest task = {max(tasks[i] for i in machine)}")
 		#print(f"{machines[i]}, {timesArr[i]}, {min(tasks[i] for i in machine)}")
 	print(
 		f"""STATS:
@@ -43,17 +46,18 @@ Output: the lists
 Description:
 	creates two lists of random integers in the appropriate ranges
 """
-def createInput(tasks, machines, seed=-1):
-	if seed != -1:
-		random.seed(seed)
+def createInput(tasks, machines, taskSeed=-1, machineSeed=-1):
+
 	tasksList = []
 	machinesList = []
 
 	# create tasks runtimes
+	if taskSeed != -1: random.seed(taskSeed)
 	for i in range(tasks):
 		tasksList.append(random.randint(1,10000))
 
 	# create machine speeds
+	if machineSeed != -1: random.seed(machineSeed)
 	for i in range(machines):
 		machinesList.append(random.randint(1,20))
 
