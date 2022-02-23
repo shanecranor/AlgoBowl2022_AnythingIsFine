@@ -19,12 +19,8 @@ performance3, distribution3 = AverageBinSort.ABS(tasks,machines)
 Parser.printBriefRunInfo("ABS", performance3)
 #Tools.printDetailedStats(distribution3, tasks, machines)
 
-performance4, distribution4 = PercentageBinSort.PBS(tasks,machines)
-Parser.printBriefRunInfo("PBS", performance4)
-#Tools.printDetailedStats(distribution4, tasks, machines)
-
 # find best performance and print result
-num = Parser.printMinPerf([performance1, performance2, performance3, performance4])
+num = Parser.printMinPerf([performance1, performance2, performance3])
 # print to output file
 if (num == 1) : Parser.generateOutputFile(performance1, distribution1)
 if (num == 2) : Parser.generateOutputFile(performance2, distribution2)
