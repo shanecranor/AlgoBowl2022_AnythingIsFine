@@ -1,12 +1,7 @@
 from cgi import test
-<<<<<<< HEAD
 import itertools 		# for permuting
-=======
-from operator import index
->>>>>>> 2916dc04c37f35a964dd1821f2594fe1b98393ac
 import statistics
 import random
-
 """
 Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
