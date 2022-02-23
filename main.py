@@ -6,7 +6,7 @@ import Tools
 import BinAndSort
 import AverageBinSort
 
-tasks, machines = Parser.parseInputFile('inputs/AnotherDemo.txt')
+tasks, machines = Parser.parseInputFile('inputs/randomMax.txt')
 performance1, distribution1 = SortAndBin.SAB(tasks,machines)
 Parser.printBriefRunInfo("SAB", performance1)
 #Tools.printDetailedStats(distribution1, tasks, machines)
@@ -22,9 +22,9 @@ Parser.printBriefRunInfo("ABS", performance3)
 # find best performance and print result
 num = Parser.printMinPerf([performance1, performance2, performance3])
 # print to output file
-if (num == 1) : Parser.generateOutputFile(performance1, distribution1)
-if (num == 2) : Parser.generateOutputFile(performance2, distribution2)
-if (num == 3) : Parser.generateOutputFile(performance3, distribution3)
+if (num == 0) : Parser.generateOutputFile(performance1, distribution1)
+if (num == 1) : Parser.generateOutputFile(performance2, distribution2)
+if (num == 2) : Parser.generateOutputFile(performance3, distribution3)
 
 ### Code for performance testings using time.time()
 # start = time.time() 

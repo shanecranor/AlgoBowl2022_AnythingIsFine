@@ -64,7 +64,8 @@ def generateOutputFile(performance, distribution):
 	print(f"Printing Output File:")
 	file = open("output.txt", "w")
 	print(performance)
-	file.write(str(performance) + "\n")
+	deciPerf = "{:.2f}".format(performance)
+	file.write(str(deciPerf) + "\n")
 	for i, machine in enumerate(distribution):
 		machine.sort()
 		for task in machine:
@@ -94,11 +95,9 @@ def printMinPerf(performances):
 	print("\nSorted order of the Algorithms------")
 	algo = ""
 	for k in range(len(perfList)) : 
-		if perfList[k][1] == 0: 
-			algo = "SortAndBin"
+		if perfList[k][1] == 0: algo = "SortAndBin"
 		if perfList[k][1] == 1: algo = "BinAndSort"
 		if perfList[k][1] == 2: algo = "AvgBinSort"
-		if perfList[k][1] == 3: algo = "P%BinSort"
 		print("Algorithm {0} :\t {1}".format(algo, perfList[k][0]))
 	return 	perfList[0][1]
 	
