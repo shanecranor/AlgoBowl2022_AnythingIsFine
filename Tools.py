@@ -84,6 +84,14 @@ def createInputFile(tasksList, machinesList, fileName):
 	f.write(out)
 	f.close()
 
+"""
+result: the answer the algorithm got
+listOfLists: a 2D array of all the lists of tasks assigned to each machine
+
+"""
+
+def createOutputFile(result, listOfLists):
+	pass
 
 """
 Input: tasksList
