@@ -9,7 +9,8 @@ import Tools
 Used to run multi core tests of algorithms that need to run multiple times 
 """
 #load input file  outside of if __name__ = main so we can run the wrapper function in parallel
-tasks, machines = Parser.parseInputFile('inputs/gen_algoinput.txt')
+tasks, machines = Parser.parseInputFile('inputs/anotherBigInput.txt')
+# distributionOpt, tasks, machines = Tools.createOptimalInput(1000, 50, 7000, 1)
 
 #wrapper for sort and bin function to allow multiprocessing
 def Sab(s):
@@ -24,10 +25,13 @@ if __name__ == "__main__":
 	end = time.time()
 	print("algo run time= ", end-start)
 	Parser.printBriefRunInfo("SAB", performance)
-	print()
-
+	Tools.printDetailedStats(distribution, tasks, machines)
+	# for i, j, k in zip(distribution, distributionOpt, machines):
+	# 	print(k)
+	# 	print(i, "SAB")
+	# 	print(j, "OPT")
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Bas, range(1000))
+	m = multiprocessing.Pool(processes=64).map(Bas, range(10000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution = min(m, key=lambda i: i[0])
@@ -35,12 +39,13 @@ if __name__ == "__main__":
 	print()
 
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Sab, range(500000))
+	m = multiprocessing.Pool(processes=64).map(Sab, range(10000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution = min(m, key=lambda i: i[0])
 	Parser.printBriefRunInfo("RandSAB", performance)
 	
+
 	#print detailed stats
 	#Tools.printDetailedStats(distribution, tasks, machines)
 	#
