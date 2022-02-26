@@ -7,6 +7,7 @@ Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
 Description:
 	Loops through each machine in the distribution and find out which one ends last
+	distribution = 
 """
 def calcTotalTime(distribution, tasks, machines):
 	timesArr = [0]*len(machines)
@@ -106,3 +107,5 @@ def combinationCompiler(tasksList):
 
 		# add currentCombination to big list
 		permutedLists.append(currentCombination)
+
+	return permutedLists
