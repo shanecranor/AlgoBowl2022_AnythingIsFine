@@ -9,7 +9,7 @@ import Tools
 Used to run multi core tests of algorithms that need to run multiple times 
 """
 #load input file  outside of if __name__ = main so we can run the wrapper function in parallel
-tasks, machines = Parser.parseInputFile('inputs/anotherBigInput.txt')
+tasks, machines = Parser.parseInputFile('maxInput_7000.txt')
 # distributionOpt, tasks, machines = Tools.createOptimalInput(1000, 50, 7000, 1)
 
 #wrapper for sort and bin function to allow multiprocessing

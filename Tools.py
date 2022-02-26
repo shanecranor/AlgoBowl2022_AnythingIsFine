@@ -171,9 +171,8 @@ def createBetterOptimalInput(tasks, machines, optimal, seed=-1):
 			distribution[i].append(k+(i*int(tasks/machines)))
 		tasksList += machineItems
 	return (distribution, tasksList, machinesList)
-eee= createBetterOptimalInput(1000,50,7000)[1]
-eee.sort()
-print(eee)
+
+
 """
 Input: number of tasks, number of machines
 Output: the lists
@@ -239,3 +238,7 @@ def combinationCompiler(tasksList):
 
 		# add currentCombination to big listxw
 		permutedLists.append(currentCombination)
+
+
+distribution, tasksList, machinesList = createBetterOptimalInput(1000,50,7000)
+createInputFile(tasksList,machinesList, "maxInput_7000.txt")
