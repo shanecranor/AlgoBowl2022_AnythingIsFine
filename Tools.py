@@ -7,12 +7,14 @@ from re import L
 import statistics
 import random
 import math
-
+import statistics
+import random
 """
 Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
 Description:
 	Loops through each machine in the distribution and find out which one ends last
+	distribution = 
 """
 def calcTotalTime(distribution, tasks, machines):
 	timesArr = [0]*len(machines)
@@ -215,6 +217,14 @@ def createInputFile(tasksList, machinesList, fileName):
 	f.write(out)
 	f.close()
 
+"""
+result: the answer the algorithm got
+listOfLists: a 2D array of all the lists of tasks assigned to each machine
+
+"""
+
+def createOutputFile(result, listOfLists):
+	pass
 
 """
 Input: tasksList
@@ -235,10 +245,8 @@ def combinationCompiler(tasksList):
 
 		# add current combination to a list
 		currentCombination = list(combinationObject)
-
-		# add currentCombination to big listxw
+		# add currentCombination to big list
 		permutedLists.append(currentCombination)
 
+	return permutedLists
 
-distribution, tasksList, machinesList = createBetterOptimalInput(1000,50,7000)
-createInputFile(tasksList,machinesList, "maxInput_7000.txt")

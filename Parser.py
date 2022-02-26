@@ -62,8 +62,42 @@ Description:
 def generateOutputFile(performance, distribution):
 	# TODO: write a version of this that outputs as a string and or prints to a file
 	print(f"Printing Output File:")
+	file = open("output.txt", "w")
 	print(performance)
+	deciPerf = "{:.2f}".format(performance)
+	file.write(str(deciPerf) + "\n")
 	for i, machine in enumerate(distribution):
+		machine.sort()
 		for task in machine:
 			print(task, end =' ')
+			file.write(str(task) + " ")
 		print()
+		file.write('\n')
+
+"""
+Input: list of performance times
+Output: which machine results in less amount of time 
+Description:
+	Goes through the performances list and output which algorithm came up with best results
+	Prints list of algorithm name and it's time in order from least to greatest
+	Returns algorithm index associated with te minimum algorithm
+"""
+def printMinPerf(performances):
+	# create corresponding indecies for each algorithm
+	perfList = []
+	i = 0
+	for p in performances :
+		perfList.append((p, i))
+		i = i + 1
+	# sort from least to greatest
+	perfList.sort(key = lambda x: x[0])
+	# print out results
+	print("\nSorted order of the Algorithms------")
+	algo = ""
+	for k in range(len(perfList)) : 
+		if perfList[k][1] == 0: algo = "SortAndBin"
+		if perfList[k][1] == 1: algo = "BinAndSort"
+		if perfList[k][1] == 2: algo = "AvgBinSort"
+		print("Algorithm {0} :\t {1}".format(algo, perfList[k][0]))
+	return 	perfList[0][1]
+	
