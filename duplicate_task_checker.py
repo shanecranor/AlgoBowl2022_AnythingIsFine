@@ -9,6 +9,6 @@ with open( '/Users/student/Downloads/inputfile1.txt', 'r') as f:
                         print(line)
                 d += 1
         if d >= 1:
-                print("Duplicates found:",d)
+                print("Duplicates tasks found:",d)
         else:
                 print("No duplicates found, all ready to go!")
