@@ -1,16 +1,14 @@
-from __future__ import print_function   
-from collections import defaultdict
-import hashlib
-import os
-import sys
+from collections import Counter
+line_seen = set()
+with open( '/Users/student/Downloads/inputfile1.txt', 'r') as f:
+        d = 0
 
-
-lines_seen = set() 
-
-with open("", "r+") as f:
-    d = f.readlines()
-    f.seek(0)
-    for i in d:
-        if i not in lines_seen:
-            f.write(i)
-            lines_seen.add(i)
+        c = Counter(c.strip() for c in f if c.strip())
+        for line in c:
+                if c[line]>1:
+                        print(line)
+                d += 1
+        if d >= 1:
+                print("Duplicates found:",d)
+        else:
+                print("No duplicates found, all ready to go!")
