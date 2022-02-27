@@ -5,29 +5,34 @@ import os
 from pydoc import importfile
 import difflib
 import sys
+import numpy as np
 
 
 
 
-def verify_generated_code():
-    generated_code = generated_code().splitlines(True)
+def file_read(fname):
+        content_array = []
+        with open(fname) as f:
+                   
+                for line in f:
+                        content_array.append(line)
+                print(content_array)
 
-    with open(os.path.join( path, "__init__.py"), "r") as fh:
-        actual = fh.readlines()
 
-        diff = list(
-            difflib.unified_diff(
-                actual, generated_code, fromfile="current", tofile="updated"
-            )
-        )
-        if diff:
-            print("Generated code is NOT up-to-date!", file=sys.stderr)
-            print(15 * "*", file=sys.stderr)
-            print("".join(diff), file=sys.stderr)
-            print(15 * "*", file=sys.stderr)
-            print("Re-run with generate to update code.", file=sys.stderr)
-            return 1
+file_read('test.txt')
 
-    print("Generated code is up-to-date!")
+initialArray = np.array([file_read('test.txt')])
+  
 
-    return 0 
+print("Our Initial Array: ", str(initialArray))
+print("Original type: " + str(type(initialArray[0])))
+  
+
+finalArray = np.asarray(initialArray, dtype = np.float64, 
+                        order ='C')
+  
+
+print("Our Final Array: ", str(finalArray))
+print(list(map(float, initialArray)))
+
+
