@@ -107,10 +107,10 @@ listOfLists: a 2D array of all the lists of tasks assigned to each machine, in o
 
 """
 
-def createOutputFile(result, listOfLists):
+def createOutputFile(result, listOfLists, filePath):
 	# first, create a blank text file
 	# Might need to ask about file path stuff??
-	with open('AlgoBowl_OutputFile', 'w') as f:
+	with open(filePath, 'w') as f:
 		# write the result at the top
 		f.write(result)
 
