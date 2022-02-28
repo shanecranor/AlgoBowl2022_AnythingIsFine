@@ -2,6 +2,7 @@ import itertools 		# for permuting
 import statistics
 import random
 import math
+from tkinter import W
 
 
 """
@@ -102,12 +103,30 @@ def printDetailedStats(distribution, tasks, machines):
 
 """
 result: the answer the algorithm got
-listOfLists: a 2D array of all the lists of tasks assigned to each machine
+listOfLists: a 2D array of all the lists of tasks assigned to each machine, in order from first machine to last
 
 """
 
 def createOutputFile(result, listOfLists):
-	pass
+	# first, create a blank text file
+	# Might need to ask about file path stuff??
+	with open('AlgoBowl_OutputFile', 'w') as f:
+		# write the result at the top
+		f.write(result)
+
+		# write all the tasks assigned to each machine in order 
+		for list in listOfLists:
+			for task in list:
+				f.write(task.rstrip("\n"))
+				if task != list[-1]:
+					f.write(" ".rstrip("\n"))
+			f.write("\n")
+
+	# close the file
+	f.close()
+
+
+
 
 """
 Input: tasksList
