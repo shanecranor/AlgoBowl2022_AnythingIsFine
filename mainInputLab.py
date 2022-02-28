@@ -1,11 +1,11 @@
 import time
 import Parser
-import SortAndBin
-import Dumb
+import Algorithms.SortAndBin as SortAndBin
+import Algorithms.Dumb as Dumb
 import Tools
 import InputCreation
-import BinAndSort
-import AverageBinSort
+import Algorithms.BinAndSort as BinAndSort
+import Algorithms.AverageBinSort as AverageBinSort
 import multiprocessing
 
 
@@ -24,6 +24,7 @@ if __name__ == "__main__":
 	start = time.time() 
 	m = multiprocessing.Pool(processes=64).map(createInputWrapper, range(53000, num))
 	end = time.time()
+
 	print(f"time to generate {num} inputs = {end-start}")
 	performance, distribution, tasks, machines, seed = max(m, key=lambda i: i[0])
 	Parser.printBriefRunInfo("RandBAS", performance)

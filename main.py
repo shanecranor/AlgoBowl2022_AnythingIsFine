@@ -1,11 +1,11 @@
 import time
 import Parser
-import SortAndBin
-import Dumb
+import Algorithms.SortAndBin as SortAndBin
+import Algorithms.Dumb as Dumb
 import Tools
 import InputCreation
-import BinAndSort
-import AverageBinSort
+import Algorithms.BinAndSort as BinAndSort
+import Algorithms.AverageBinSort as AverageBinSort
 
 tasks, machines = Parser.parseInputFile('inputs/randomMax.txt')
 performance1, distribution1 = SortAndBin.SAB(tasks,machines)
