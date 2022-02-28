@@ -59,10 +59,10 @@ Output:
 Description:
 	prints a submitable output file
 """
-def generateOutputFile(performance, distribution):
+def generateOutputFile(performance, distribution, fileName="output.txt"):
 	# TODO: write a version of this that outputs as a string and or prints to a file
 	print(f"Printing Output File:")
-	file = open("output.txt", "w")
+	file = open(fileName, "w")
 	print(performance)
 	deciPerf = "{:.2f}".format(performance)
 	file.write(str(deciPerf) + "\n")

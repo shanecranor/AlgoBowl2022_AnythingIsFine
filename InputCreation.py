@@ -24,7 +24,7 @@ def createRandomListWithDefiniteSum(targetSum, items, seed=-1):
 		print("ERROR, there must be less items than the target sum")
 		return None
 	if targetSum/items > MAX_TASK:
-		print("ERROR: target sum too large")
+		#print("ERROR: target sum too large")
 		return None
 	out = []
 	movingTargetSum = targetSum
@@ -98,7 +98,7 @@ def createListDefiniteSum(targetSum, items, seed=-1, evolutions=1000):
 		print("ERROR, there must be less items than the target sum")
 		return None
 	if targetSum/items > MAX_TASK:
-		print("ERROR: target sum too large")
+		#print("ERROR: target sum too large")
 		return None
 
 

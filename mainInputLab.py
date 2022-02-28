@@ -17,15 +17,29 @@ def createInputWrapper(seed):
 	return (SABperf, distribution, tasks, machines, seed)
 
 if __name__ == "__main__":
-	#SABperf, distribution, tasks, machines, seed = createInputWrapper(54714)
-	#InputCreation.createInputFile(tasks, machines, "seed_54714_max_dificil.txt")
+	SABperf, distribution, tasks, machines, seed = createInputWrapper(678771)
+	InputCreation.createInputFile(tasks, machines, "seed_678771_max_dificil.txt")
+	Parser.generateOutputFile(9550.0, distribution, "seed_678771_OPT_SOLUTION")
+	quit()
+	num = 1650000
+	startingPoint = 950000
+	#163520
+	#460445
+	#678771
+	stops = 25
+	best = []
+	for i in range(stops):
+		startSeed = startingPoint+int((num-startingPoint)/stops)*i
+		start = time.time() 
+		m  = multiprocessing.Pool(processes=64).map(createInputWrapper, range(startSeed, startSeed + int((num-startingPoint)/stops)))
+		end = time.time()
 
-	num = 10000
-	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(createInputWrapper, range(53000, num))
-	end = time.time()
-
-	print(f"time to generate {num} inputs = {end-start}")
-	performance, distribution, tasks, machines, seed = max(m, key=lambda i: i[0])
-	Parser.printBriefRunInfo("RandBAS", performance)
-	print(seed)
+		print(f"{startSeed}/{num} time to generate {int((num-startingPoint)/stops)} inputs = {end-start}")
+		performance, distribution, tasks, machines, seed = max(m, key=lambda i: i[0])
+		Parser.printBriefRunInfo("Local Best", performance)
+		print(seed)
+		best.append((performance, distribution, tasks, machines, seed))
+		performance, distribution, tasks, machines, seed = max(best, key=lambda i: i[0])
+		Parser.printBriefRunInfo("Global Best", performance)
+		print(seed)
+		print()
