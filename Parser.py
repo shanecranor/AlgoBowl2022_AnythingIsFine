@@ -60,18 +60,17 @@ Description:
 	prints a submitable output file
 """
 def generateOutputFile(performance, distribution, fileName="output.txt"):
-	# TODO: write a version of this that outputs as a string and or prints to a file
 	print(f"Printing Output File:")
 	file = open(fileName, "w")
-	print(performance)
+	#print(performance)
 	deciPerf = "{:.2f}".format(round(performance,2))
 	file.write(str(deciPerf) + "\n")
 	for i, machine in enumerate(distribution):
 		machine.sort()
 		for task in machine:
-			print(task, end =' ')
+			#print(task, end =' ')
 			file.write(str(task) + " ")
-		print()
+		#print()
 		file.write('\n')
 
 """
