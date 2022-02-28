@@ -18,11 +18,11 @@ def createInputWrapper(seed):
 
 if __name__ == "__main__":
 	SABperf, distribution, tasks, machines, seed = createInputWrapper(678771)
-	InputCreation.createInputFile(tasks, machines, "seed_678771_max_dificil.txt")
-	Parser.generateOutputFile(9550.0, distribution, "seed_678771_OPT_SOLUTION")
+	InputCreation.createInputFile(tasks, machines, "inputs/seed_678771_max_dificil.txt")
+	Parser.generateOutputFile(9550.0, distribution, "outputs/seed_678771_OPT_SOLUTION.txt")
 	quit()
-	num = 1650000
-	startingPoint = 950000
+	num = 2050000
+	startingPoint = 1650000
 	#163520
 	#460445
 	#678771
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 	for i in range(stops):
 		startSeed = startingPoint+int((num-startingPoint)/stops)*i
 		start = time.time() 
-		m  = multiprocessing.Pool(processes=64).map(createInputWrapper, range(startSeed, startSeed + int((num-startingPoint)/stops)))
+		m = multiprocessing.Pool(processes=64).map(createInputWrapper, range(startSeed, startSeed + int((num-startingPoint)/stops)))
 		end = time.time()
 
 		print(f"{startSeed}/{num} time to generate {int((num-startingPoint)/stops)} inputs = {end-start}")

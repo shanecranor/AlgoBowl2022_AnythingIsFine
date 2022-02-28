@@ -39,7 +39,7 @@ if __name__ == "__main__":
 	print() 
 
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Bas, range(150000))
+	m = multiprocessing.Pool(processes=64).map(Bas, range(20000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution, seed = min(m, key=lambda i: i[0])
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 	print("seed:",seed,"\n")
 
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Sab, range(10000))
+	m = multiprocessing.Pool(processes=64).map(Sab, range(1000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution, seed = min(m, key=lambda i: i[0])

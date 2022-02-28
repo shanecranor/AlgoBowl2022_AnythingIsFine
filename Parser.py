@@ -69,7 +69,7 @@ def generateOutputFile(performance, distribution, fileName="output.txt"):
 		machine.sort()
 		for task in machine:
 			#print(task, end =' ')
-			file.write(str(task) + " ")
+			file.write(str(task+1) + " ")
 		#print()
 		file.write('\n')
 
