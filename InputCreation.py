@@ -22,9 +22,10 @@ def createRandomListWithDefiniteSum(targetSum, items, seed=-1):
 	MAX_TASK = 10000
 	if items >= targetSum:
 		print("ERROR, there must be less items than the target sum")
-		return
+		return None
 	if targetSum/items > MAX_TASK:
 		print("ERROR: target sum too large")
+		return None
 	out = []
 	movingTargetSum = targetSum
 	movingItems = items
@@ -43,6 +44,14 @@ def createRandomListWithDefiniteSum(targetSum, items, seed=-1):
 		movingTargetSum -= newTask
 		movingItems -= 1
 		#print(upperBound, lowerBound, movingTargetSum,targetSum-sum(out), movingItems, out, sep="\t")
+	out.sort()
+	t = 0
+	while sum(out) != targetSum:
+		if(sum(out) < targetSum):
+			out[t%len(out)] += 1
+		if(sum(out)> targetSum):
+			out[t%len(out)] -= 1
+		t += 1
 	return out
 
 """
@@ -77,7 +86,44 @@ def removeDupesKeepSum(arr, prevItems = [], seed=-1):
 		arr[modIndex]-=modifier
 	return arr
 
+"""
+Input: target sum and number of items
+Output: List of of length items that sums to the target sum
+"""
+def createListDefiniteSum(targetSum, items, seed=-1, evolutions=1000):
+	if seed != -1: random.seed(seed)
+	out = []
+	MAX_TASK = 10000
+	if items >= targetSum:
+		print("ERROR, there must be less items than the target sum")
+		return None
+	if targetSum/items > MAX_TASK:
+		print("ERROR: target sum too large")
+		return None
 
+
+	for i in range(items):
+		out.append(int(targetSum/items))
+	fail = 0			
+	for i in range(evolutions):
+		idx1 = random.randint(0,len(out)-1)
+		idx2 = random.randint(0,len(out)-1)
+		if( out[idx1]-1 > 1 and out[idx2]+1 < 10000):
+			out[idx1]-=1
+			out[idx2]+=1 
+		elif( out[idx2]-1 > 1 and out[idx1]+1 < 10000):
+			out[idx2]-=1
+			out[idx1]+=1 
+		else:
+			fail +=1
+	t = 0
+	while sum(out) != targetSum:
+		if(sum(out) < targetSum):
+			out[t%len(out)] += 1
+		if(sum(out)> targetSum):
+			out[t%len(out)] -= 1
+		t += 1
+	return out
 """ 
 Input: number of tasks, number of machines, optimal run time
 Output: list of tasks and machines as well as an output distribution
@@ -94,6 +140,8 @@ def createOptimalInput(tasks, machines, optimal, seed=-1):
 		machinesList.append(random.randint(1,20))
 		sumSeed = random.randint(1,5000)
 		machineItems = createRandomListWithDefiniteSum(optimal * machinesList[-1], int(tasks/machines), sumSeed)
+		if machineItems is None:
+			return None
 		# if(sum(machineItems) != optimal * machinesList[-1]):
 		# 	print(sum(machineItems), optimal * machinesList[-1],int(tasks/machines), sumSeed)
 		distribution.append([])
@@ -109,21 +157,45 @@ Output: list of tasks and machines as well as an output distribution
 Description:
 	creates two lists of random integers in the appropriate ranges except there is a known optimal solution
 """
-def createBetterOptimalInput(tasks, machines, optimal, seed=-1):
+def createBetterOptimalInput(tasks, machines, optimal, seed=-1, diffLengthMachines=False, removeDupes=True, isGlobalDupes=True, useWorseRandom=True, numberOfWorseIterations=1000):
 	tasksList = []
 	machinesList = []
 	distribution = []
 	# create machine speeds
 	if seed != -1: random.seed(seed)
+	machineSizes = []
+	#Create list of machines and sort them from slowest to fastest
 	for i in range(machines):
 		machinesList.append(random.randint(1,20))
-		machineItems = createRandomListWithDefiniteSum(optimal * machinesList[-1], int(tasks/machines))
-		machineItems = removeDupesKeepSum(machineItems)#, tasksList)
-		# if(sum(machineItems) != optimal * machinesList[-1]):
-		# 	print(sum(machineItems), optimal * machinesList[-1],int(tasks/machines), sumSeed)
+	machinesList.sort()
+
+	if diffLengthMachines:
+		#create list of the length of each machine
+		machineSizes = createListDefiniteSum(tasks, machines)
+		#sort from least items to most items
+		machineSizes.sort()
+	else:
+		#every machine should have the same length
+		for i in range(machines):
+			machineSizes.append(int(tasks/machines))
+	
+	for i in range(machines):
+		if useWorseRandom:
+			machineItems = createListDefiniteSum(optimal * machinesList[i], machineSizes[i], evolutions=numberOfWorseIterations)
+		else:
+			machineItems = createRandomListWithDefiniteSum(optimal * machinesList[i], machineSizes[i])
+	
+		if machineItems is None: return (None, None, None)
+		if(sum(machineItems) != optimal * machinesList[i]):
+			print(sum(machineItems), optimal * machinesList[i], machineItems)
+		if removeDupes:
+			if isGlobalDupes:
+				machineItems = removeDupesKeepSum(machineItems)
+			else:
+				machineItems = removeDupesKeepSum(machineItems, tasksList, True)
 		distribution.append([])
-		for k in range(int(tasks/machines)):
-			distribution[i].append(k+(i*int(tasks/machines)))
+		for k in range(machineSizes[i]):
+			distribution[i].append(k+(sum(machineSizes[0:i])))
 		tasksList += machineItems
 	return (distribution, tasksList, machinesList)
 

@@ -5,12 +5,13 @@ import SortAndBin
 import BinAndSort
 import Dumb
 import Tools
+import InputCreation
 """
 Used to run multi core tests of algorithms that need to run multiple times 
 """
 #load input file  outside of if __name__ = main so we can run the wrapper function in parallel
-tasks, machines = Parser.parseInputFile('inputs/maxInput_7000.txt')
-# distributionOpt, tasks, machines = Tools.createOptimalInput(1000, 50, 7000, 1)
+tasks, machines = Parser.parseInputFile('inputs/seed_54714_max_dificil.txt')
+
 
 #wrapper for sort and bin function to allow multiprocessing
 def Sab(s):
@@ -25,13 +26,8 @@ if __name__ == "__main__":
 	end = time.time()
 	print("algo run time= ", end-start)
 	Parser.printBriefRunInfo("SAB", performance)
-	Tools.printDetailedStats(distribution, tasks, machines)
-	# for i, j, k in zip(distribution, distributionOpt, machines):
-	# 	print(k)
-	# 	print(i, "SAB")
-	# 	print(j, "OPT")
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Bas, range(10000))
+	m = multiprocessing.Pool(processes=64).map(Bas, range(5000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution = min(m, key=lambda i: i[0])
@@ -39,7 +35,7 @@ if __name__ == "__main__":
 	print()
 
 	start = time.time() 
-	m = multiprocessing.Pool(processes=64).map(Sab, range(10000))
+	m = multiprocessing.Pool(processes=64).map(Sab, range(1000))
 	end = time.time()
 	print("algo run time= ", end-start)
 	performance, distribution = min(m, key=lambda i: i[0])

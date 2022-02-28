@@ -6,43 +6,25 @@ import Tools
 import InputCreation
 import BinAndSort
 import AverageBinSort
-for i in range(100):
-	distribution, tasks, machines = InputCreation.createBetterOptimalInput(1000, 50, 5000 + (i * 70), i+1)
-	print(i)
-	Parser.printBriefRunInfo("OPT", Tools.calcTotalTime(distribution,tasks,machines))
-	range = Tools.getStats(Tools.generateTimesArr(distribution,tasks, machines))[3]
-	if( range != 0):
-		print("not optimal")
-		continue
+import multiprocessing
 
-	Tools.validateInput(tasks,machines)
-	performance1, distribution1 = SortAndBin.SAB(tasks,machines)
-	Parser.printBriefRunInfo("SAB", performance1)
-	#Tools.printDetailedStats(distribution1, tasks, machines)
 
-	performance2, distribution2 = BinAndSort.BAS(tasks,machines)
-	Parser.printBriefRunInfo("BAS", performance2)
-	#Tools.printDetailedStats(distribution2, tasks, machines)
+def createInputWrapper(seed):
+	distribution, tasks, machines = InputCreation.createBetterOptimalInput(1000, 50, 9550, seed, True, False,  False, True, 50)#+(seed%600))
+	if not Tools.validateInput(tasks,machines):
+		return (0,0,0,0,0)
+	SABperf, SABdist = SortAndBin.SAB(tasks,machines)
+	return (SABperf, distribution, tasks, machines, seed)
 
-	performance3, distribution3 = AverageBinSort.ABS(tasks,machines)
-	Parser.printBriefRunInfo("ABS", performance3)
-	#Tools.printDetailedStats(distribution3, tasks, machines)
+if __name__ == "__main__":
+	#SABperf, distribution, tasks, machines, seed = createInputWrapper(54714)
+	#InputCreation.createInputFile(tasks, machines, "seed_54714_max_dificil.txt")
 
-# # find best performance and print result
-# num = Parser.printMinPerf([performance1, performance2, performance3])
-# # print to output file
-# if (num == 0) : Parser.generateOutputFile(performance1, distribution1)
-# if (num == 1) : Parser.generateOutputFile(performance2, distribution2)
-# if (num == 2) : Parser.generateOutputFile(performance3, distribution3)
-
-### Code for performance testings using time.time()
-# start = time.time() 
-# for i in range(100):
-# 	performance, distribution = SortAndBin.SAB(tasks,machines)
-# end = time.time()
-# print("total time= ", end-start)
-# for i in range(100):
-# 	performance, distribution = BinAndSort.BAS(tasks,machines)
-# 	#Parser.printBriefRunInfo("BAS", performance)
-# end = time.time()
-# print("total time= ", end-start)
+	num = 10000
+	start = time.time() 
+	m = multiprocessing.Pool(processes=64).map(createInputWrapper, range(53000, num))
+	end = time.time()
+	print(f"time to generate {num} inputs = {end-start}")
+	performance, distribution, tasks, machines, seed = max(m, key=lambda i: i[0])
+	Parser.printBriefRunInfo("RandBAS", performance)
+	print(seed)

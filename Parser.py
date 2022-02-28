@@ -101,3 +101,19 @@ def printMinPerf(performances):
 		print("Algorithm {0} :\t {1}".format(algo, perfList[k][0]))
 	return 	perfList[0][1]
 	
+"""
+Input: list of performance times
+Output: which machine results in less amount of time 
+Description:
+"""
+def getMinPerf(performances):
+	# create corresponding indecies for each algorithm
+	perfList = []
+	i = 0
+	for p in performances :
+		perfList.append((p, i))
+		i = i + 1
+	# sort from least to greatest
+	perfList.sort(key = lambda x: x[0])
+
+	return 	perfList[0][1]

@@ -1,38 +1,39 @@
-from ast import mod
-from cgi import test
 import itertools 		# for permuting
-from operator import index
-from platform import machine
-from re import L
 import statistics
 import random
 import math
-import statistics
-import random
 
 
 """
 Input: list of tasks and machines
-Output: nothing
+Output: true if valid false if invalid
 Description:
 	Prints if an input does not match the spec
 """
 def validateInput(tasks, machines):
+	if tasks is None or machines is None:
+		return False
 	if len(tasks) > 1000:
 		print(F"There are {len(tasks)} tasks in this input, max possible is 1000")
+		return False
 	if len(machines) > 50:
 		print(F"There are {len(machines)} in this input, max possible is 50")
+		return False
 	for task in tasks:
 		if task < 1:
 			print(F"{task} is not a valid task length")
+			return False
 		if task > 10000:
 			print(F"{task} is not a valid task length")
+			return False
 	for machine in machines:
 		if machine < 1:
 			print(F"{machine} is not a valid machine speed")
+			return False
 		if machine > 20:
 			print(F"{machine} is not a valid machine speed")
-
+			return False
+	return True
 """
 Input: distribution, list of tasks, list of machines
 Output: machine that takes the longest
@@ -45,7 +46,7 @@ def calcTotalTime(distribution, tasks, machines):
 	for i, machine in enumerate(distribution):
 		#TODO: use numpy for faster addition  (probably not a huge bottleneck tho)
 		#https://stackoverflow.com/questions/47734392/python-numpy-array-sum-over-certain-indices
-		timesArr[i] = sum(tasks[i] for i in machine)/machines[i]
+		timesArr[i] = sum(tasks[k] for k in machine)/machines[i]
 	return max(timesArr)
 
 
@@ -54,7 +55,7 @@ def generateTimesArr(distribution, tasks, machines):
 	for i, machine in enumerate(distribution):
 		#TODO: use numpy for faster addition  (probably not a huge bottleneck tho)
 		#https://stackoverflow.com/questions/47734392/python-numpy-array-sum-over-certain-indices
-		timesArr[i] = sum(tasks[i] for i in machine)/machines[i]
+		timesArr[i] = sum(tasks[k] for k in machine)/machines[i]
 	return timesArr
 
 def printStats(timesArr):
