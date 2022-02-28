@@ -35,7 +35,7 @@ def isMissingTasks(distribution, tasks):
 			return True
 	return False
 	
-def validateOutputFile(infilename, outfilename):
+def isValidOutputFile(infilename, outfilename):
 	tasks, machines = Parser.parseInputFile(infilename)
 	if not Tools.validateInput(tasks, machines):
 		print("Invalid Input")
@@ -52,8 +52,9 @@ def validateOutputFile(infilename, outfilename):
 		print("output has a duplicate task")
 		return False
 	return True
-
-if(validateOutputFile("seed_678771_max_dificil.txt","seed_678771_OPT_SOLUTION")):
-	print("file is valid!")
-else:
-	print("file is invalid :/")
+	
+def validateOutputFile(infilename, outfilename):
+	if(isValidOutputFile(infilename, outfilename)):
+		print("file is valid!")
+	else:
+		print("file is invalid :/")

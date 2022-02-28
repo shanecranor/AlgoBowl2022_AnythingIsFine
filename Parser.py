@@ -64,7 +64,7 @@ def generateOutputFile(performance, distribution, fileName="output.txt"):
 	print(f"Printing Output File:")
 	file = open(fileName, "w")
 	print(performance)
-	deciPerf = "{:.2f}".format(performance)
+	deciPerf = "{:.2f}".format(round(performance,2))
 	file.write(str(deciPerf) + "\n")
 	for i, machine in enumerate(distribution):
 		machine.sort()
