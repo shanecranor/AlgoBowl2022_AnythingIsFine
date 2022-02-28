@@ -97,7 +97,7 @@ def printDetailedStats(distribution, tasks, machines):
 		if timesArr[i] == 0:
 			print(f"Machine {i}: \t Speed:{machines[i]} No tasks alloted")
 		else:
-			print(f"Machine {i}: \t Speed:{machines[i]} \t Runtime: {round(timesArr[i],2)} \t shortest task = {min(tasks[i] for i in machine)} longest task = {max(tasks[i] for i in machine)}")
+			print(f"Machine {i}: \t Speed:{machines[i]} \t Runtime: {round(timesArr[i],2)} \t shortest task = {min(tasks[i] for i in machines)} longest task = {max(tasks[i] for i in machines)}")
 		#print(f"{machines[i]}, {timesArr[i]}, {min(tasks[i] for i in machine)}")
 	printStats(timesArr)
 
