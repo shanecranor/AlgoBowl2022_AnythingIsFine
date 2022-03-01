@@ -41,6 +41,7 @@ def isValidOutputFile(infilename, outfilename):
 		print("Invalid Input")
 		return False
 	expectedPerformance, distribution = parseOutput(outfilename)
+	distribution = fixOutputFileDistribution(distribution)
 	performance = Tools.calcTotalTime(distribution, tasks, machines)
 	if(expectedPerformance != performance):
 		print("performance is incorrect")
@@ -58,3 +59,14 @@ def validateOutputFile(infilename, outfilename):
 		print("file is valid!")
 	else:
 		print("file is invalid :/")
+
+def fixOutputFileDistribution(distribution) : 
+	newDist = []
+	for mach in distribution : 
+		temp = []
+		for task in mach :
+			#print(task)
+			temp.append(task - 1)
+			#print(str(task) + "\n")
+		newDist.append(temp)
+	return newDist
