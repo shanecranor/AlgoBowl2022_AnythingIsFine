@@ -10,7 +10,7 @@ def parseOutput(filename):
 	for line in s[1:-1]:
 		distribution.append([])
 		for num in line.split():
-			distribution[-1].append(int(num)-1)
+			distribution[-1].append(int(num)) 
 	return (expectedPerformance, distribution)
 
 def isDupes(distribution):
@@ -29,7 +29,7 @@ def isMissingTasks(distribution, tasks):
 	for	line in distribution:
 		for item in line:
 			seen.append(item)
-	for i in range(0,len(tasks)):
+	for i in range(len(tasks)): 
 		if i not in seen:
 			print(f"{i} not in output :/")
 			return True
@@ -52,7 +52,7 @@ def isValidOutputFile(infilename, outfilename):
 		print("output has a duplicate task")
 		return False
 	return True
-
+	
 def validateOutputFile(infilename, outfilename):
 	if(isValidOutputFile(infilename, outfilename)):
 		print("file is valid!")

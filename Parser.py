@@ -59,7 +59,7 @@ Output:
 Description:
 	prints a submitable output file
 """
-def generateOutputFile(performance, distribution, fileName="output.txt"):
+def generateOutputFile(performance, distribution, fileName="outputs/output.txt"):
 	print(f"Printing Output File:")
 	file = open(fileName, "w")
 	#print(performance)

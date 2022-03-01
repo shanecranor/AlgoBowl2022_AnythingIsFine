@@ -7,7 +7,7 @@ import InputCreation
 import Algorithms.BinAndSort as BinAndSort
 import Algorithms.AverageBinSort as AverageBinSort
 
-tasks, machines = Parser.parseInputFile('inputs/randomMax.txt')
+tasks, machines = Parser.parseInputFile('inputs/AnotherDemo.txt')
 performance1, distribution1 = SortAndBin.SAB(tasks,machines)
 Parser.printBriefRunInfo("SAB", performance1)
 #Tools.printDetailedStats(distribution1, tasks, machines)
