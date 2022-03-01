@@ -32,7 +32,7 @@ def Bas(temp):
 	return performance, distribution, s
 
 if __name__ == "__main__":
-	startSeed = 0
+	startSeed = 50000
 	for fileIndex in range(len(realInputs)):
 		tasks, machines = realInputs[fileIndex][0],realInputs[fileIndex][1]
 
@@ -58,8 +58,8 @@ if __name__ == "__main__":
 		iters = 1
 		#RUN RAND BAS 
 		start = time.time() 
-		iters = 50000
-		m = multiprocessing.Pool(processes=64).map(Bas, zip(range(iters),[fileIndex]*iters))
+		iters = 300000
+		m = multiprocessing.Pool(processes=64).map(Bas, zip(range(startSeed,startSeed+iters),[fileIndex]*iters))
 		end = time.time()
 		print("algo run time= ", end-start)
 		performance, distribution, seed = min(m, key=lambda i: i[0])
@@ -73,8 +73,8 @@ if __name__ == "__main__":
 		
 		#RUN RAND SAB
 		start = time.time() 
-		iters = 16000
-		m = multiprocessing.Pool(processes=64).map(Sab, zip(range(iters),[fileIndex]*iters))
+		iters = 106000
+		m = multiprocessing.Pool(processes=64).map(Sab, zip(range(startSeed,startSeed+iters),[fileIndex]*iters))
 		end = time.time()
 		print("algo run time= ", end-start)
 		performance, distribution, seed = min(m, key=lambda i: i[0])

@@ -42,9 +42,9 @@ def isValidOutputFile(infilename, outfilename):
 		return False
 	expectedPerformance, distribution = parseOutput(outfilename)
 	distribution = fixOutputFileDistribution(distribution)
-	performance = Tools.calcTotalTime(distribution, tasks, machines)
+	performance = round(Tools.calcTotalTime(distribution, tasks, machines),2)
 	if(expectedPerformance != performance):
-		print("performance is incorrect")
+		print(f"performance is incorrect, actual = {expectedPerformance} file stated performance {performance}")
 		return False
 	if(isMissingTasks(distribution, tasks)):
 		print("output is missing tasks")
