@@ -9,7 +9,7 @@ def shuffleMachines(inputfile, outputfile) :
     # get input and outputs
     inTask, inMach = Parser.parseInputFile(inputfile)
     outOpt, outDist = outputValidator.parseOutput(outputfile)
-    print(inMach, outDist)
+    #print(inMach, outDist)
     # shuffle machines around
     for i in range(len(inMach) - 1) : 
         j = random.randint(0, i+1)
@@ -17,8 +17,8 @@ def shuffleMachines(inputfile, outputfile) :
         outDist[i], outDist[j] = outDist[j], outDist[i]
     # print shuffled arrs to text files
     ## input
-    print(inMach)
-    infile = open("outputs/newInput.txt", "w")
+    #print(inMach)
+    infile = open("inputs/SeedNewInput.txt", "w")
     infile.write( str(len(inTask)) + "\n" + str(len(inMach)) + "\n")
     for task in inTask :
         infile.write( str(task) + " ")
@@ -27,9 +27,10 @@ def shuffleMachines(inputfile, outputfile) :
         infile.write( str(mach) + " ")
 
     ## output
-    print(outDist)
-    outfile = open("outputs/newOutput.txt", "w")
-    outfile.write(str(outOpt) + "\n")
+    #print(outDist)
+    outfile = open("outputs/SeedNewOutput.txt", "w")
+    deciPerf = "{:.2f}".format(round(outOpt,2))
+    outfile.write(str(deciPerf) + "\n")
     for i, mach in enumerate(outDist) : 
         for task in mach : 
             outfile.write( str(task) + " " )
@@ -38,6 +39,6 @@ def shuffleMachines(inputfile, outputfile) :
 
 
 # UNCOMMENT FOR SEED
-#shuffleMachines('inputs/seed_678771_max_dificil.txt', 'outputs/seed_678771_OPT_SOLUTION.txt')
+shuffleMachines('inputs/seed_678771_max_dificil.txt', 'outputs/seed_678771_OPT_SOLUTION.txt')
 # TESTING
-shuffleMachines('inputs/AnotherDemo.txt', 'outputs/output.txt')
+#shuffleMachines('inputs/AnotherDemo.txt', 'outputs/output.txt')
