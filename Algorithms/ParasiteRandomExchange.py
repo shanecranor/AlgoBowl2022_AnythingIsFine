@@ -1,19 +1,18 @@
 import Tools
 import random
 """
-Input: tuple (tasks, machines)
+Input: outputmatrix
 Output: tuple (max length, 2D array of task allocation per machine)
 Description:
 	Bins the tasks equally onto each machine
 	Removes tasks from one of the longest running machines to the shortest running machine it can fit in until they are about the same size
 """
-def BAS(tasks, machines, rand=-1, seed=-1, retOutputMatrix=False):
+def PRE(outputMatrix, rand=500, tolerance=100 seed=-1):
 	if seed != -1: random.seed(seed)
-	outputMatrix = bin(tasks, machines)
 	# choose n random elements from the longest running machines
-	for i in range(500):
-		#sort machines from longest to shortest
-		outputMatrix.sort(key=lambda x: x[2]*-1)
+	for i in range(rand):
+		# #sort machines from longest to shortest
+		# outputMatrix.sort(key=lambda x: x[2]*-1)
 		#select a random long running machine
 		randMachine = random.randint(0, len(outputMatrix)//2)
 		# skip if length is zero
@@ -43,8 +42,7 @@ def BAS(tasks, machines, rand=-1, seed=-1, retOutputMatrix=False):
 		else:
 			pass
 			#print("F", end ='')
-	if(retOutputMatrix):
-		return outputMatrix
+
 	outputMatrix.sort(key=lambda x: x[0][1])
 	# create the output distribution in the right format
 	distribution = []

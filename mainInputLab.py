@@ -17,10 +17,13 @@ def createInputWrapper(seed):
 	return (SABperf, distribution, tasks, machines, seed)
 
 if __name__ == "__main__":
-	SABperf, distribution, tasks, machines, seed = createInputWrapper(678771)
-	InputCreation.createInputFile(tasks, machines, "inputs/seed_678771_max_dificil.txt")
-	Parser.generateOutputFile(9550.0, distribution, "outputs/seed_678771_OPT_SOLUTION.txt")
-	quit()
+	# SABperf, distribution, tasks, machines, seed = createInputWrapper(678771)
+	# #InputCreation.createInputFile(tasks, machines, "inputs/seed_678771_max_dificil.txt")
+	# BASperf,distribution = BinAndSort.BAS(tasks,machines,1000,10343)
+	# Parser.generateOutputFile(BASperf, distribution, "outputs/seed_678771_BAS_SOLUTION.txt")
+	
+	#BASperf = BinAndSort.BAS(tasks,machines,1000,10343)
+	# quit()
 	num = 2050000
 	startingPoint = 1650000
 	#163520
