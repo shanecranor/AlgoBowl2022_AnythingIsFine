@@ -56,9 +56,9 @@ def isValidOutputFile(infilename, outfilename):
 	
 def validateOutputFile(infilename, outfilename):
 	if(isValidOutputFile(infilename, outfilename)):
-		print("file is valid!")
+		print(f"file {outfilename} is valid output for {infilename}!")
 	else:
-		print("file is invalid :/")
+		print(f"ERROR: file {outfilename} is NOT valid output for {infilename}!")
 
 def fixOutputFileDistribution(distribution) : 
 	newDist = []
