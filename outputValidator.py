@@ -44,7 +44,7 @@ def isValidOutputFile(infilename, outfilename):
 	distribution = fixOutputFileDistribution(distribution)
 	performance = round(Tools.calcTotalTime(distribution, tasks, machines),2)
 	if(expectedPerformance != performance):
-		print(f"performance is incorrect, actual = {expectedPerformance} file stated performance {performance}")
+		print(f"performance is incorrect, actual = {performance} file stated performance {expectedPerformance}")
 		return False
 	if(isMissingTasks(distribution, tasks)):
 		print("output is missing tasks")
@@ -54,9 +54,10 @@ def isValidOutputFile(infilename, outfilename):
 		return False
 	return True
 	
-def validateOutputFile(infilename, outfilename):
+def validateOutputFile(infilename, outfilename, quiet=False):
 	if(isValidOutputFile(infilename, outfilename)):
-		print(f"file {outfilename} is valid output for {infilename}!")
+		if( not quiet):
+			print(f"file {outfilename} is valid output for {infilename}!")
 	else:
 		print(f"ERROR: file {outfilename} is NOT valid output for {infilename}!")
 

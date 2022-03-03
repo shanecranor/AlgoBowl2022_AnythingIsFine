@@ -14,7 +14,7 @@ Used to run multi core tests of algorithms that need to run multiple times
 #load and validate all inputs
 realInputs =[]
 for file in os.listdir('real_inputs'):
-	if("347" in file or "348" in file or "349" in file or "355" in file or "358" in file or "398" in file or "367" in file ):
+	if("400" in file or "365" in file or "406" in file or "408" in file or "366" in file or "359" in file or "360" in file ):
 		print(file)
 		tasks, machines = Parser.parseInputFile('real_inputs/' + file)
 		Tools.validateInput(tasks,machines)
@@ -74,11 +74,12 @@ if __name__ == "__main__":
 		Parser.printBriefRunInfo("RandBAS", performance)
 		print("seed:",seed,"\n")
 
-		for eee in range(10):
+		for eee in range(100):
 			#RUN RAND SAB
 			start = time.time() 
-			startSeed = (50000+106000+206000)+(206000*eee)
-			iters = 206000
+			
+			iters = int(206000/10)
+			startSeed = (50000+106000+206000)+(iters*eee)
 			m = multiprocessing.Pool(processes=64).map(Sab, zip(range(startSeed,startSeed+iters),[fileIndex]*iters))
 			end = time.time()
 			print("algo run time= ", end-start)
